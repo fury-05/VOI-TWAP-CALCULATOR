@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOI TWAP Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>VOI TWAP Calculator</h1>
+        <div class="input-group">
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" required>
+        </div>
+        <div class="input-group">
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" required>
+        </div>
+        <div class="input-group">
+            <label for="usd-amount">Amount in USD:</label>
+            <input type="number" id="usd-amount" placeholder="Enter amount in USD" required>
+        </div>
+        <button class="btn" id="calculate-btn">Calculate</button>
+
+        <div class="result">
+            <div class="result-header">Results</div>
+            <table class="result-table">
+                <tbody>
+                    <tr>
+                        <td><strong>Voi TWAP Price Taken At :</strong></td>
+                        <td id="voi-twap"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Voi Amount You Get At TWAP Price :</strong></td>
+                        <td id="voi-amount"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Current Price Of VOI:</strong></td>
+                        <td id="current-price"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Price Difference To Get To TWAP Price (%):</strong></td>
+                        <td id="price-difference"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amount if Sold at TWAP:</strong></td>
+                        <td id="amount-if-sold-twap"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Difference if Sold at TWAP:</strong></td>
+                        <td id="difference-if-sold-twap"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amount if Sold at Current Price:</strong></td>
+                        <td id="amount-if-sold-current"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Difference if Sold at Current Price:</strong></td>
+                        <td id="difference-if-sold-current"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status:</strong></td>
+                        <td id="status" class="status"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Note on TWAP price source and interval -->
+            <div id="twap-note" style="margin-top: 10px; color: #fff;">
+                TWAP price is calculated from the historical prices of VOI over the selected date range at hourly intervals.
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #7851A9; /* Royal Purple background */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.2); /* Glass effect */
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), /* Depth of field shadow */
+                inset 0 0 15px rgba(255, 255, 255, 0.3); /* Inner light glow */
+    backdrop-filter: blur(12px); /* Increased blur for glassmorphism effect */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-10px); /* Subtle lift on hover */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), /* Deeper shadow */
+                inset 0 0 20px rgba(255, 255, 255, 0.4); /* Brighter inner glow */
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align inputs */
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+}
+
+input[type="date"],
+input[type="number"] {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 100%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Soft shadow on inputs */
+}
+
+input[type="date"]:focus,
+input[type="number"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5); /* Glowing focus */
+}
+
+.btn {
+    width: 90%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.1em;
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.4);
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-5px); /* Button lifts on hover */
+}
+
+.result {
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 90%;
+}
+
+.result-header {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: black; /* Black text for result output */
+    background-color: #fff;
+}
+
+.result-table th,
+.result-table td {
+    border: 3px solid black; /* Black border for table */
+    padding: 12px;
+    text-align: left;
+    font-size: 1.1em;
+}
+
+.result-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.result-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.2); /* Slight alternate row color */
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.green {
+    color: green;
+}
+
+.status.red {
+    color: red;
+}
+
+.status.yellow {
+    color: yellow;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.6em;
+    }
+
+    .result-header {
+        font-size: 1.3em;
+    }
+
+    .result-table th,
+    .result-table td {
+        font-size: 1em;
+    }
+}
