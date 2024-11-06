@@ -19,29 +19,42 @@ document.getElementById('calculate-btn').addEventListener('click', async () => {
     const startTimestamp = Math.floor(startDate.getTime() / 1000);
     const endTimestamp = Math.floor(endDate.getTime() / 1000);
 
-    // API URL
+    // API URL for TWAP calculation
     const url = `https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart/range?vs_currency=usd&from=${startTimestamp}&to=${endTimestamp}`;
 
     try {
+        // Fetch historical data for TWAP calculation
         const response = await fetch(url);
         if (!response.ok) throw new Error('Network response was not ok');
 
         const data = await response.json();
 
-        // Calculate TWAP (Time-Weighted Average Price)
+        // Calculate TWAP using volume data
+        let totalWeightedValue = 0;
         let totalVolume = 0;
-        let totalValue = 0;
 
-        for (const priceData of data.prices) {
-            const price = priceData[1]; // Price in USD
-            const volume = priceData[0] / 1000; // Volume in thousands
-            totalValue += price * volume;
+        for (let i = 0; i < data.prices.length; i++) {
+            const price = data.prices[i][1]; // Price in USD
+            const volume = data.total_volumes[i][1]; // Volume in USD
+            
+            // Skip if volume data is missing
+            if (!volume || volume <= 0) continue;
+
+            totalWeightedValue += price * volume;
             totalVolume += volume;
         }
 
-        const twap = totalValue / totalVolume;
+        const twap = totalWeightedValue / totalVolume; // Volume-weighted TWAP
         const voiAmount = usdAmount / twap;
-        const currentPrice = data.prices[data.prices.length - 1][1]; // Last price
+
+        // Fetch real-time current price of VOI
+        const currentPriceUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=usd`;
+        const currentPriceResponse = await fetch(currentPriceUrl);
+        if (!currentPriceResponse.ok) throw new Error('Failed to fetch current price');
+
+        const currentPriceData = await currentPriceResponse.json();
+        const currentPrice = currentPriceData[cryptoId].usd;
+
         const priceDifferencePercent = ((currentPrice - twap) / twap) * 100;
 
         const amountIfSoldAtTWAP = voiAmount * twap;
